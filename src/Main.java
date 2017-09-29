@@ -16,7 +16,7 @@ public class Main {
         System.out.println(GCD.gcd_rem(a, b));
     }
 
-    public static void Task2(String str) {
+    private static void Task2(String str) {
         /*
         Implement a bidirectional Rot13 algorithm. Encode/decode
         a string from the command line argument.
@@ -31,8 +31,17 @@ public class Main {
         System.out.println("new str = " + newStr);
     }
 
+    private static void Task3() {
+        String hexNum = "78AB";
+        System.out.println(HexToDec.convert(hexNum));
+        System.out.println("Standard Implementation: ");
+        System.out.println(Long.decode("0x" + hexNum));
+
+    }
+
     public static void main(String[] args) {
         //Task1();
-        if (args.length != 0) Task2(args[0]);
+        //if (args.length != 0) Task2(args[0]);
+        Task3();
     }
 }
