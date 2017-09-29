@@ -1,3 +1,7 @@
+import java.io.PrintStream;
+import java.util.Scanner;
+import java.util.stream.Stream;
+
 public class Main {
     public static void Task1() {
         /*
@@ -32,6 +36,10 @@ public class Main {
     }
 
     private static void Task3() {
+        /*
+        Write a program to convert an input hexadecimal
+        string into its equivalent decimal number.
+         */
         String hexNum = "78AB";
         System.out.println(HexToDec.convert(hexNum));
         System.out.println("Standard Implementation: ");
@@ -39,9 +47,28 @@ public class Main {
 
     }
 
+    public static void Task4(){
+        /*
+        Write methods that turn a Scanner into a stream
+        of words, lines, integers, or double values.
+         */
+        Scanner scanner = new Scanner("12 546 1427 8421");
+        ScanToStream stream = new ScanToStream(scanner);
+    }
+
+    public static void Task5() {
+        /*
+        Unzip the src.zip file from the JDK. Using Files.walk, find
+        all Java files that contain the keywords transient and volatile.
+         */
+
+    }
+
     public static void main(String[] args) {
         //Task1();
         //if (args.length != 0) Task2(args[0]);
-        Task3();
+        //Task3();
+        //Task4();
+        Task5();
     }
 }
