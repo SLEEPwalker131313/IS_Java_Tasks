@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Main {
     public static void Task1() {
@@ -76,12 +77,19 @@ public class Main {
         System.out.println(CharCounter.count("//home//vadim//Загрузки//slurm-62472.out", symbol));
     }
 
+    public static void Task8(){
+        //Be careful. An infinite stream!!!
+        Stream<Long> stream = RandomNumsStream.getStream(1, 4, 6, 22);
+        stream.forEach(System.out::println);
+    }
+
     public static void main(String[] args) throws IOException {
         //Task1();
         //if (args.length != 0) Task2(args[0]);
         //Task3();
         //Task4();
         //Task5();
-        if (args.length != 0 && args[0].length() == 1) Task6(args[0].charAt(0));
+        //if (args.length != 0 && args[0].length() == 1) Task6(args[0].charAt(0));
+        Task8();
     }
 }
