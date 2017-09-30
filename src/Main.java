@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -56,15 +57,24 @@ public class Main {
         ScanToStream stream = new ScanToStream(scanner);
     }
 
-    public static void Task5() {
+    public static void Task5() throws IOException {
         /*
         Unzip the src.zip file from the JDK. Using Files.walk, find
         all Java files that contain the keywords transient and volatile.
          */
+        String path = "//home/vadim//Загрузки//jdk1.8.0_144//src.zip";
+        String outpath = "//home/vadim//Загрузки//jdksrc";
+
+        TransientVolatileSearcher.unZipIt(path, outpath);
+        TransientVolatileSearcher.findFiles(outpath);
+//        System.out.println(TransientVolatileSearcher.getFiles(path));
+//        for (String file: TransientVolatileSearcher.getFiles(path)){
+//            System.out.println(file);
+//        }
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //Task1();
         //if (args.length != 0) Task2(args[0]);
         //Task3();
