@@ -57,7 +57,7 @@ public class Main {
         ScanToStream stream = new ScanToStream(scanner);
     }
 
-    public static void Task5() throws IOException {
+    private static void Task5() throws IOException {
         /*
         Unzip the src.zip file from the JDK. Using Files.walk, find
         all Java files that contain the keywords transient and volatile.
@@ -67,10 +67,6 @@ public class Main {
 
         TransientVolatileSearcher.unZipIt(path, outpath);
         TransientVolatileSearcher.findFiles(outpath);
-//        System.out.println(TransientVolatileSearcher.getFiles(path));
-//        for (String file: TransientVolatileSearcher.getFiles(path)){
-//            System.out.println(file);
-//        }
 
     }
 

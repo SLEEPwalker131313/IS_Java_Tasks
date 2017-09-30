@@ -1,20 +1,19 @@
 import java.io.*;
-import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-class TransientVolatileSearcher{
+class TransientVolatileSearcher {
 
-    public static void unZipIt(String zipFile, String outputFolder){
+    public static void unZipIt(String zipFile, String outputFolder) {
 
         byte[] buffer = new byte[1024];
 
-        try{
+        try {
             //create output directory is not exists
             File folder = new File(outputFolder);
-            if(!folder.exists()){
+            if (!folder.exists()) {
                 folder.mkdir();
             }
 
@@ -24,7 +23,7 @@ class TransientVolatileSearcher{
             //get the zipped file list entry
             ZipEntry ze = zis.getNextEntry();
 
-            while(ze!=null){
+            while (ze != null) {
 
                 String fileName = ze.getName();
                 File newFile = new File(outputFolder + File.separator + fileName);
@@ -42,8 +41,7 @@ class TransientVolatileSearcher{
 
                 fos.close();
 
-                System.out.println("file unzip : "+ newFile.getAbsoluteFile());
-//                System.out.println(Files.walk(FileSystems.getDefault().getPath("//home//vadim//").));
+//                System.out.println("file unzip : "+ newFile.getAbsoluteFile());
 
                 ze = zis.getNextEntry();
             }
@@ -51,10 +49,32 @@ class TransientVolatileSearcher{
             zis.closeEntry();
             zis.close();
 
-            System.out.println("Done");
+            System.out.println("Unzipped");
 
-        }catch(IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    static void findFiles(String folder) throws IOException {
+        //Search by java folder only
+        Path path = Paths.get(folder + "//java");
+        //Folder to files
+        try (Stream<Path> pstream = Files.walk(path)
+                .filter(Files::isRegularFile)) {
+            pstream.forEach(it -> {
+                //Files to lines
+                try (Stream<String> sstream = Files.lines(it)) {
+                    if (sstream.anyMatch(its ->
+                            its.contains("transient") ||
+                            its.contains("Transient") ||
+                            its.contains("volatile")  ||
+                            its.contains("Volatile")))
+                        System.out.println(it);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 }
