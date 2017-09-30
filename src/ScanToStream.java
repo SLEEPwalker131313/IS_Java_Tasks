@@ -2,8 +2,8 @@ import java.util.Scanner;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public class ScanToStream <T> {
-    public Stream<T> stream;
+class ScanToStream <T> {
+    private Stream<T> stream;
 
     private class ScannerToSupplier<T> implements Supplier<T> {
 

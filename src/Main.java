@@ -1,7 +1,5 @@
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 public class Main {
     public static void Task1() {
@@ -65,9 +63,17 @@ public class Main {
         String path = "//home/vadim//Загрузки//jdk1.8.0_144//src.zip";
         String outpath = "//home/vadim//Загрузки//jdksrc";
 
-        TransientVolatileSearcher.unZipIt(path, outpath);
-        TransientVolatileSearcher.findFiles(outpath);
+        KeywordSearcher.unZipIt(path, outpath);
+        KeywordSearcher.findFiles(outpath);
 
+    }
+
+    private static void Task6(char symbol) throws IOException {
+        /*
+        Write an example that counts the number of times a particular character,
+        such as E, appears in a file. The character can be specified at the command line
+         */
+        System.out.println(CharCounter.count("//home//vadim//Загрузки//slurm-62472.out", symbol));
     }
 
     public static void main(String[] args) throws IOException {
@@ -75,6 +81,7 @@ public class Main {
         //if (args.length != 0) Task2(args[0]);
         //Task3();
         //Task4();
-        Task5();
+        //Task5();
+        if (args.length != 0 && args[0].length() == 1) Task6(args[0].charAt(0));
     }
 }

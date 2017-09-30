@@ -4,7 +4,7 @@ import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-class TransientVolatileSearcher {
+class KeywordSearcher {
 
     public static void unZipIt(String zipFile, String outputFolder) {
 
@@ -65,16 +65,20 @@ class TransientVolatileSearcher {
             pstream.forEach(it -> {
                 //Files to lines
                 try (Stream<String> sstream = Files.lines(it)) {
-                    if (sstream.anyMatch(its ->
-                            its.contains("transient") ||
-                            its.contains("Transient") ||
-                            its.contains("volatile")  ||
-                            its.contains("Volatile")))
+                    if (isContain(sstream))
                         System.out.println(it);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             });
         }
+    }
+
+    private static boolean isContain(Stream<String> sstream) {
+        return sstream.anyMatch(its ->
+                its.contains("transient") ||
+                its.contains("Transient") ||
+                its.contains("volatile")  ||
+                its.contains("Volatile"));
     }
 }
