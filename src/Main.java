@@ -110,7 +110,7 @@ public class Main {
         a Stream. Try out a = 25214903917, c = 11, and m = 2^48.
          */
         //Be careful. An infinite stream!!!
-        Stream<Long> stream = RandomNumsStream.getStream(1, 4, 6, 22);
+        Stream<Long> stream = RandomNumsStream.getStream(1, 25214903917L, 11, 2^48);
         stream.forEach(System.out::println);
     }
 

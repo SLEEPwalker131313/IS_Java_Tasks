@@ -6,7 +6,7 @@ import java.util.zip.ZipInputStream;
 
 class KeywordSearcher {
 
-    public static void unZipIt(String zipFile, String outputFolder) {
+    static void unZipIt(String zipFile, String outputFolder) {
 
         byte[] buffer = new byte[1024];
 
