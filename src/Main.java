@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -77,7 +78,34 @@ public class Main {
         System.out.println(CharCounter.count("//home//vadim//Загрузки//slurm-62472.out", symbol));
     }
 
-    public static void Task8(){
+    public static void Task7(String arg) {
+        /*
+        Write a program that reads a text file, specified by the first command line
+        argument, into a List. The program should then print random lines from the
+        file, the number of lines printed to be specified by the second command
+        line argument. Write the program so that a correctly-sized collection is
+        allocated all at once, instead of being gradually expanded as the file is
+        read in. Hint: To determine the number of lines in the file, use
+        java.io.File.length to obtain the size of the file, then divide by an
+        assumed size of an average line
+         */
+        try {
+            List<String> list = FileToList.getList(arg, 5);
+            System.out.println("list = " + list);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void Task8(){
+        /*
+        Using Stream.iterate, make an infinite stream of random numbers—not by
+        calling Math.random but by directly implementing a linear congruential
+        generator. In such a generator, you start with x0 = seed and then
+        produce xn + 1 = (a xn + c) % m, for appropriate values of a, c, and m.
+        You should implement a method with parameters a, c, m, and seed that yields
+        a Stream. Try out a = 25214903917, c = 11, and m = 2^48.
+         */
         //Be careful. An infinite stream!!!
         Stream<Long> stream = RandomNumsStream.getStream(1, 4, 6, 22);
         stream.forEach(System.out::println);
@@ -90,6 +118,7 @@ public class Main {
         //Task4();
         //Task5();
         //if (args.length != 0 && args[0].length() == 1) Task6(args[0].charAt(0));
-        Task8();
+        //Task8();
+        if (args.length != 0) Task7(args[0]);
     }
 }
