@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class FileToList {
+class FileToList {
 
-    public static List<String> getList(String path, int num) throws IOException {
+    static List<String> getList(String path, int num) throws IOException {
         int lineLength = 80;
         File file = new File(path);
         List<String> fileList = new ArrayList<>((int) (file.length() / lineLength) * 2);

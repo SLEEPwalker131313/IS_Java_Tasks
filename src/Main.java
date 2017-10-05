@@ -1,7 +1,10 @@
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 public class Main {
     public static void Task1() {
@@ -78,7 +81,7 @@ public class Main {
         System.out.println(CharCounter.count("//home//vadim//Загрузки//slurm-62472.out", symbol));
     }
 
-    public static void Task7(String arg) {
+    private static void Task7(String arg) {
         /*
         Write a program that reads a text file, specified by the first command line
         argument, into a List. The program should then print random lines from the
@@ -111,6 +114,16 @@ public class Main {
         stream.forEach(System.out::println);
     }
 
+    private static void Task9() {
+        /*
+        Write a method public static Stream zip(Stream first, Stream second) that alternates
+        elements from the streams first and second, stopping when one of them runs out of elements.
+         */
+        Stream<Integer> odd = IntStream.iterate(1, x -> x + 2).limit(10).boxed();
+        Stream<Integer> even = IntStream.iterate(2, x -> x + 2).limit(13).boxed();
+        System.out.println(StreamZip.zip(odd, even).collect(toList()));
+    }
+
     public static void main(String[] args) throws IOException {
         //Task1();
         //if (args.length != 0) Task2(args[0]);
@@ -119,6 +132,7 @@ public class Main {
         //Task5();
         //if (args.length != 0 && args[0].length() == 1) Task6(args[0].charAt(0));
         //Task8();
-        if (args.length != 0) Task7(args[0]);
+        //if (args.length != 0) Task7(args[0]);
+        Task9();
     }
 }
