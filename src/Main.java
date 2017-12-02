@@ -1,10 +1,7 @@
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
 
 public class Main {
     public static void Task1() {
@@ -114,14 +111,13 @@ public class Main {
         stream.forEach(System.out::println);
     }
 
-    private static void Task9() {
+    private static void Task9(Stream<Integer> firstStream, Stream<Integer> secondStream) {
         /*
         Write a method public static Stream zip(Stream first, Stream second) that alternates
         elements from the streams first and second, stopping when one of them runs out of elements.
          */
-        Stream<Integer> odd = IntStream.iterate(1, x -> x + 2).limit(10).boxed();
-        Stream<Integer> even = IntStream.iterate(2, x -> x + 2).limit(13).boxed();
-        System.out.println(StreamZip.zip(odd, even).collect(toList()));
+        StreamZip.zip(firstStream, secondStream)
+                .forEach(System.out::println);
     }
 
     public static void main(String[] args) throws IOException {
@@ -133,6 +129,6 @@ public class Main {
         //if (args.length != 0 && args[0].length() == 1) Task6(args[0].charAt(0));
         //Task8();
         //if (args.length != 0) Task7(args[0]);
-        Task9();
+        Task9(Stream.of(1, 2, 3, 4), Stream.of(99, 98, 97, 96, 95));
     }
 }
