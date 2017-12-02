@@ -1,35 +1,33 @@
+import java.util.Iterator;
 import java.util.stream.Stream;
-import java.util.ArrayList;
+import java.util.stream.StreamSupport;
 
 class StreamZip {
     static Stream zip(Stream firstStream, Stream secondStream) {
-        Zipilder<Object> zip = new Zipilder<>();
-        Object[] firstList = firstStream.toArray();
-        Object[] secondList = secondStream.toArray();
-        for (int i = 0; i < Math.min(firstList.length, secondList.length); ++i) {
-            zip.add(firstList[i]);
-            zip.add(secondList[i]);
-        }
-        return zip.build();
-    }
-}
+        Iterator firstIterator = firstStream.iterator();
+        Iterator secondIterator = secondStream.iterator();
 
-class Zipilder<T> implements Stream.Builder<T> {
-    private ArrayList<T> container = null;
+        Iterator zipIterator = new Iterator() {
+            boolean iteratorFlag = true;
+            @Override
+            public boolean hasNext() {
+                if(iteratorFlag)
+                    return firstIterator.hasNext();
+                else
+                    return secondIterator.hasNext();
+            }
 
-    public Stream<T> build() {
-        return container.stream();
-    }
+            @Override
+            public Object next() {
+                iteratorFlag = !iteratorFlag;
+                if (iteratorFlag)
+                    return secondIterator.next();
+                else
+                    return firstIterator.next();
+            }
+        };
+        Iterable iterable = ()-> zipIterator;
 
-    public void accept(T elem) {
-        if(container == null)
-            container = new ArrayList<T>();
-        if (elem != null)
-            container.add(elem);
-    }
-
-    public Stream.Builder<T> add(T obj) {
-        this.accept(obj);
-        return this;
+        return StreamSupport.stream(iterable.spliterator(), false);
     }
 }
